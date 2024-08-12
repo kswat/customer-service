@@ -1,5 +1,6 @@
 package com.example;
 
+import io.micrometer.observation.annotation.Observed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ public class CustomerController {
     WebClient client ;
 
     @RequestMapping(value="/customer/{cid}", method=RequestMethod.GET)
+    @Observed(name="customerservice.processing" , contextualName = "Get customer and vehicle details" )
 	public CustomerDetails getCustomer(@PathVariable String cid) {
 
         CustomerDetails customer = new CustomerDetails();
